@@ -189,27 +189,57 @@ section a:hover {
 
   <!-- 📰 Noticias -->
   <section class="container my-5">
-    <h2>Últimas Noticias</h2>
-    <div class="bg-light p-4 rounded shadow-sm">
-      <ul class="list-unstyled">
-        <li class="mb-3">
-          <strong>📍 Nueva visita guiada:</strong> El Centro Islámico del Carmel organizó una visita intercultural el <em>3 de marzo de 2023</em>, dando la bienvenida a vecinos para conocer las tradiciones islámicas.
-        </li>
-        <li class="mb-3">
-          <strong>🕌 Crecimiento comunitario:</strong> La mezquita sigue siendo un lugar de paz, oración y aprendizaje, con excelente reputación y afluencia creciente.
-        </li>
-        <li>
-          <strong>📢 Eventos próximos:</strong> Oración del AID el <strong>Sábado a las 9:00</strong> en <em>Plaza Catalunya</em>.
-        </li>
-      </ul>
+  <h2 class="text-center mb-4">📰 Últimas Noticias</h2>
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-tools text-success me-2"></i> Renovación del Espacio
+          </h5>
+          <p class="card-text">
+            La mezquita ha sido renovada con nuevas alfombras y un moderno sistema de aire acondicionado para mayor confort de los fieles.
+          </p>
+        </div>
+      </div>
     </div>
-  </section>
+
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-users text-success me-2"></i> Crecimiento Comunitario
+          </h5>
+          <p class="card-text">
+            El centro sigue siendo un lugar de paz, oración y aprendizaje, con excelente reputación y afluencia creciente entre vecinos y visitantes.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-bullhorn text-success me-2"></i> Eventos Próximos
+          </h5>
+          <p class="card-text">
+            <em>Actualmente no hay eventos previstos. Compartiremos novedades próximamente inshallah.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
 <hr style="border: none; height: 2px; background: linear-gradient(to right, #D4AF37, #A3C9A8); margin: 40px 0;">
 
   <!-- ⏰ Tiempos de oración -->
   <section class="container my-5">
-    <h2>Horarios de Oración en Barcelona</h2>
+    <h2>Horarios de Oración</h2>
     <div id="prayer-times" class="text-center"></div>
   </section>
 
@@ -318,7 +348,7 @@ section a:hover {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- 🕋 Script de oración -->
- <script>
+<script>
   fetch("https://api.aladhan.com/v1/timingsByCity?city=Barcelona&country=Spain")
     .then(res => res.json())
     .then(data => {
@@ -346,16 +376,31 @@ section a:hover {
 
       const rows = required.map(name => {
         const adhan = timings[name];
-        const iqama = addDelay(adhan, delays[name]);
-        return `<tr><td>${name}</td><td>${adhan}</td><td>${iqama}</td></tr>`;
+        const salat = addDelay(adhan, delays[name]);
+        return `
+          <tr>
+            <td>${name}</td>
+            <td>
+              ${adhan}
+              <br><em class="text-muted small">+${delays[name]} min</em>
+            </td>
+            <td>${salat}</td>
+          </tr>
+        `;
       }).join("");
 
       document.getElementById("prayer-times").innerHTML = `
-        <table class="prayer-table">
-          <thead>
-            <tr><th>Oración</th><th>Adhan</th><th>Iqama</th></tr>
+        <table class="prayer-table table table-bordered text-center">
+          <thead class="table-light">
+            <tr>
+              <th>Oración</th>
+              <th>Adhan</th>
+              <th>Salat</th>
+            </tr>
           </thead>
-          <tbody>${rows}</tbody>
+          <tbody>
+            ${rows}
+          </tbody>
         </table>
       `;
     });
@@ -363,3 +408,4 @@ section a:hover {
 
 </body>
 </html>
+
