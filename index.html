@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
   <!-- 🧩 Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -21,56 +22,24 @@
       background-color: #F9F9F9;
       color: #2C6E49;
     }
-
-    /* Navbar */
-    .navbar {
-      background-color: #2C6E49;
-      padding: 1rem 2rem;
-      border-bottom: 2px solid #D4AF37;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
- .brand-name {
-  text-align: center;
-  padding: 0.8rem;
+   
+.navbar-brand {
   font-family: 'Cairo', sans-serif;
-  line-height: 1.4;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0.5px 0.5px rgba(44, 110, 73, 0.2);
+  
 }
-
-.brand-name .main-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-.brand-name .highlight {
-  color: #D4AF37;
-  font-weight: 600;
-}
-
-.brand-name .location {
-  font-size: 1rem;
-  font-style: italic;
-  color: #A3C9A8;
-}
-.navbar {
-  position: sticky;
-  top: 0;
-  background-color: #2C6E49;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  .text-brand {
+  color: #143923;
 }
 
 
-    .brand-name span {
-      color: #D4AF37;
-    }
 
     section:nth-of-type(even) {
       background-color: #FFFFFF;
-    }
+    }   
 
     section:nth-of-type(odd) {
       background-color: #F0F0F0;
@@ -82,6 +51,7 @@
       border-radius: 12px;
       margin-bottom: 30px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        scroll-margin-top: 150px;
     }
 
     h2 {
@@ -166,29 +136,50 @@ section a:hover {
 
   </style>
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="70" tabindex="0">
 
   <!-- 🕌 Navbar -->
   <!-- Navbar -->
-<nav class="navbar">
-  <div class="brand-name">
-    <div class="main-title">
-      <span>Centro Islámico Cultural</span>
-    </div>
-    <hr style="width: 50px; height: 3px; background-color: #D4AF37; border: none; margin: 8px auto;">
+<nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm fixed-top" id="mainNavbar">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+  <img src="logomoon.PNG" alt="Centro Logo" height="50" class="me-2">
+  <span class="text-brand">Centro Cultural Islamico Del Carmel</span>
+</a>
 
-    <div class="location">
-      del Carmel · Barcelona
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav gap-3">
+        <li class="nav-item">
+          <a class="nav-link" href="#noticias">Noticias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#Salat">Salat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#infantil-programa">Actividades</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contacto">Contacto</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
+
+<br>
 
 
 <hr style="border: none; height: 2px; background: linear-gradient(to right, #D4AF37, #A3C9A8); margin: 40px 0;">
 
 
   <!-- 📰 Noticias -->
-  <section class="container my-5">
+  <section class="container my-5 pt-5" id="noticias">
   <h2 class="text-center mb-4">📰 Últimas Noticias</h2>
   <div class="row g-4">
 
@@ -238,7 +229,7 @@ section a:hover {
 <hr style="border: none; height: 2px; background: linear-gradient(to right, #D4AF37, #A3C9A8); margin: 40px 0;">
 
   <!-- ⏰ Tiempos de oración -->
-  <section class="container my-5">
+  <section class="container my-5 pt-5" id="Salat">
     <h2>Horarios de Oración</h2>
     <div id="prayer-times" class="text-center"></div>
   </section>
@@ -348,7 +339,7 @@ section a:hover {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- 🕋 Script de oración -->
-<script>
+ <script>
   fetch("https://api.aladhan.com/v1/timingsByCity?city=Barcelona&country=Spain")
     .then(res => res.json())
     .then(data => {
@@ -406,6 +397,15 @@ section a:hover {
     });
 </script>
 
+<script>
+  document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
 </body>
 </html>
-
